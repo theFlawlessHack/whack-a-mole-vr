@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
 
     private Mole[] moles;
     private float spawnTimer = 0f;
+    private float resetTimer = 3f;
 
     // Use this for initialization
     void Start()
@@ -50,6 +52,11 @@ public class GameController : MonoBehaviour
         else
         {
             InfoText.text = "Game over! Your score: " + Mathf.Floor(player.score);
+
+            resetTimer -= Time.deltaTime;
+            if (resetTimer <= 0f)  {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 }
