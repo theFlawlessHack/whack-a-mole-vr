@@ -7,8 +7,10 @@ public class Mole : MonoBehaviour {
     public float visibleHeight = 0.1f;
     public float hiddenHeight = -0.5f;
     public float speed = 4f;
+    public float disappearDuration = 1.25f;
 
     private Vector3 targetPosition;
+    private float disappearTimer = 0f;
 
 	// Use this for initialization
 	void Awake () {
@@ -23,6 +25,11 @@ public class Mole : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        disappearTimer -= Time.deltaTime;
+        if (disappearTimer <= 0f) {
+            Hide();
+        }
+
         transform.localPosition = Vector3.Lerp( transform.localPosition, targetPosition, Time.deltaTime * speed);
 	}
 
@@ -32,13 +39,19 @@ public class Mole : MonoBehaviour {
             visibleHeight,
             transform.localPosition.z
         );
+
+        disappearTimer = disappearDuration;
     }
 
-    public void OnHit () {
+    public void Hide () {
         targetPosition = new Vector3(
             transform.localPosition.x,
             hiddenHeight,
             transform.localPosition.z
         );
+    }
+
+    public void OnHit () {
+        Hide();
     }
 }
