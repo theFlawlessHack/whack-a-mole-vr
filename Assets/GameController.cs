@@ -10,7 +10,9 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        moles = moleContainer.GetComponentsInChildren<Mole>();
+
+        moles[Random.Range(0, moles.Length)].Rise();
 	}
 	
 	// Update is called once per frame

@@ -11,10 +11,10 @@ public class Mole : MonoBehaviour {
     private Vector3 targetPosition;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         targetPosition = new Vector3(
             transform.localPosition.x,
-            visibleHeight,
+            hiddenHeight,
             transform.localPosition.z
             );
 
@@ -25,6 +25,14 @@ public class Mole : MonoBehaviour {
 	void Update () {
         transform.localPosition = Vector3.Lerp( transform.localPosition, targetPosition, Time.deltaTime * speed);
 	}
+
+    public void Rise() {
+        targetPosition = new Vector3(
+            transform.localPosition.x,
+            visibleHeight,
+            transform.localPosition.z
+        );
+    }
 
     public void OnHit () {
         targetPosition = new Vector3(
