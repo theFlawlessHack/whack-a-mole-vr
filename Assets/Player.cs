@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    public int score = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +22,8 @@ public class Player : MonoBehaviour {
                 if (hit.transform.GetComponent<Mole>() != null) {
                     Mole mole = hit.transform.GetComponent<Mole>();
                     mole.OnHit();
+
+                    score++;
                 }
             }
         }
